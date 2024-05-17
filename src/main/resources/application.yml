@@ -1,0 +1,13 @@
+spring:
+  cache:
+    type: caffeine
+    caffeine:
+      spec: expireAfterWrite=5m
+
+
+
+  security:
+    user:
+      name: bala
+      password: bala123
+
