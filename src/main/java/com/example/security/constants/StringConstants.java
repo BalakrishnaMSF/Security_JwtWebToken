@@ -1,7 +1,12 @@
-package com.example.FinalTask3.constants;
+package com.example.security.constants;
 
 
 public class StringConstants {
+
+    private StringConstants(){
+
+    }
+
     public static final String INVALID="Invalid email and phone number";
     public static final String FIRSTNAME = "FirstName is required";
     public static final String LASTNAME = "LastName is Required";

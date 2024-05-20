@@ -1,17 +1,15 @@
-package com.example.FinalTask3.service;
+package com.example.security.service;
 
 
-import com.example.FinalTask3.constants.StringConstants;
-import com.example.FinalTask3.model.Contact;
-import com.example.FinalTask3.model.ContactDto;
-import com.example.FinalTask3.model.PhoneNumber;
-import com.example.FinalTask3.model.UserDetails;
-import com.example.FinalTask3.repository.ContactRepository;
-
+import com.example.security.constants.StringConstants;
+import com.example.security.model.Contact;
+import com.example.security.model.ContactDto;
+import com.example.security.model.PhoneNumber;
+import com.example.security.model.User;
+import com.example.security.repository.ContactRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +23,11 @@ public class ContactService {
 
     private static final Logger logger = LoggerFactory.getLogger(ContactService.class);
 
-    @Autowired
-    private ContactRepository contactsRepository;
+    private final ContactRepository contactsRepository;
+
+    public ContactService(ContactRepository contactsRepository) {
+        this.contactsRepository = contactsRepository;
+    }
 
     public boolean availableContactByNumber(String phoneNumber) {
         return contactsRepository.existsByPhonenums_MbNo(phoneNumber);
@@ -56,7 +57,7 @@ public class ContactService {
         return contactsRepository.save(contact);
     }
 
-    public List<Contact> getContactsForUser(UserDetails user) {
+    public List<Contact> getContactsForUser(User user) {
         logger.info(StringConstants.GET, user);
         return contactsRepository.findByUserInfo(user);
     }

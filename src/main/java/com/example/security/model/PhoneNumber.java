@@ -1,7 +1,7 @@
-package com.example.FinalTask3.model;
+package com.example.security.model;
 
 
-import com.example.FinalTask3.constants.StringConstants;
+import com.example.security.constants.StringConstants;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

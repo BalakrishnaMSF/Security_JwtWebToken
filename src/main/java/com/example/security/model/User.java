@@ -1,6 +1,6 @@
-package com.example.FinalTask3.model;
+package com.example.security.model;
 
-import com.example.FinalTask3.constants.StringConstants;
+import com.example.security.constants.StringConstants;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class UserDetails {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

@@ -1,8 +1,8 @@
-package com.example.FinalTask3;
+package com.example.security;
 
-import com.example.FinalTask3.controller.UserController;
-import com.example.FinalTask3.model.UserDetails;
-import com.example.FinalTask3.service.UserService;
+import com.example.security.controller.UserController;
+import com.example.security.model.User;
+import com.example.security.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -38,25 +38,25 @@ class FinalTask3ApplicationTests {
 	public void testAddUser() {
 		setUp();
 
-		UserDetails userInfo = new UserDetails();
+		User userInfo = new User();
 		userInfo.setUserName("Bala");
 		userInfo.setEmail("Bala@example.com");
 		userInfo.setRole("ROLE_USER");
 		userInfo.setPassword("123");
 		userInfo.setPhNo("8745634563");
 
-		when(userService.addUserDetails(any(UserDetails.class))).thenReturn("USER_DETAILS_ADDED_SUCCESSFULLY");
+		when(userService.addUserDetails(any(User.class))).thenReturn("USER_DETAILS_ADDED_SUCCESSFULLY");
 
 		ResponseEntity<String> result = userController.addUser(userInfo);
 
-		verify(userService).addUserDetails(any(UserDetails.class));
+		verify(userService).addUserDetails(any(User.class));
 	}
 
 	@Test
 	public void testAllUsers() {
-		List<UserDetails> userList = new ArrayList<>();
+		List<User> userList = new ArrayList<>();
 
-		UserDetails user1 = new UserDetails();
+		User user1 = new User();
 		user1.setId(1);
 		user1.setUserName("User1");
 		user1.setEmail("user1@example.com");
@@ -65,7 +65,7 @@ class FinalTask3ApplicationTests {
 		user1.setRole("ROLE_USER");
 		userList.add(user1);
 
-		UserDetails user2 = new UserDetails();
+		User user2 = new User();
 		user2.setId(2);
 		user2.setUserName("User2");
 		user2.setEmail("user2@example.com");
@@ -77,7 +77,7 @@ class FinalTask3ApplicationTests {
 
 		when(userService.getAllUsers()).thenReturn(userList);
 
-		List<UserDetails> response = userController.getAllUsers();
+		List<User> response = userController.getAllUsers();
 
 		assertEquals(userList, response);
 	}

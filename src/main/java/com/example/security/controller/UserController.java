@@ -1,12 +1,12 @@
-package com.example.FinalTask3.controller;
+package com.example.security.controller;
 
 
 
-import com.example.FinalTask3.constants.StringConstants;
-import com.example.FinalTask3.model.UserDetails;
-import com.example.FinalTask3.service.JwtService;
-import com.example.FinalTask3.service.UserService;
-import com.example.FinalTask3.token.AuthenticationRequest;
+import com.example.security.constants.StringConstants;
+import com.example.security.model.User;
+import com.example.security.service.JwtService;
+import com.example.security.service.UserService;
+import com.example.security.token.AuthenticationRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,17 +25,20 @@ import java.util.List;
 @Slf4j
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    private JwtService jwtService;
+    private final JwtService jwtService;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
+
+    public UserController(UserService userService, JwtService jwtService, AuthenticationManager authenticationManager) {
+        this.userService = userService;
+        this.jwtService = jwtService;
+        this.authenticationManager = authenticationManager;
+    }
 
     @PostMapping("/add")
-    public ResponseEntity<String> addUser(@Valid @RequestBody UserDetails userInfo) {
+    public ResponseEntity<String> addUser(@Valid @RequestBody User userInfo) {
         log.info(StringConstants.REQ_REC_ADD_USER, userInfo);
 
         String result = userService.addUserDetails(userInfo);
@@ -63,7 +66,7 @@ public class UserController {
     }
 
     @GetMapping("/all")
-    public List<UserDetails> getAllUsers() {
+    public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 }

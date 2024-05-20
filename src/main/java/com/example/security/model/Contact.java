@@ -1,7 +1,7 @@
-package com.example.FinalTask3.model;
+package com.example.security.model;
 
 
-import com.example.FinalTask3.constants.StringConstants;
+import com.example.security.constants.StringConstants;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -29,7 +29,7 @@ public class Contact {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private UserDetails userInfo;
+    private User userInfo;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @Valid

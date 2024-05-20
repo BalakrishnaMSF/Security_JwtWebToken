@@ -1,23 +1,23 @@
-package com.example.FinalTask3.config;
+package com.example.security.config;
 
-
-
-import com.example.FinalTask3.constants.StringConstants;
+import com.example.security.constants.StringConstants;
+import com.example.security.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
+import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UserDetailsInfo implements org.springframework.security.core.userdetails.UserDetails {
+
+public class UserDetailsInfo implements UserDetails {
 
     private final String emailOrPhNo;
     private final String password;
     private final List<GrantedAuthority> authorities;
 
-    public UserDetailsInfo(com.example.FinalTask3.model.UserDetails userInfo) {
+    public UserDetailsInfo(User userInfo) {
         emailOrPhNo = getEmailOrPhNo(userInfo);
         password = userInfo.getPassword();
         authorities = Arrays.stream(userInfo.getRole().split(","))
@@ -25,7 +25,7 @@ public class UserDetailsInfo implements org.springframework.security.core.userde
                 .collect(Collectors.toList());
     }
 
-    private String getEmailOrPhNo(com.example.FinalTask3.model.UserDetails userInfo) {
+    private String getEmailOrPhNo(User userInfo) {
         if (isValidEmail(userInfo.getEmail())) {
             return userInfo.getEmail();
         } else if (isValidPhoneNumber(userInfo.getPhNo())) {

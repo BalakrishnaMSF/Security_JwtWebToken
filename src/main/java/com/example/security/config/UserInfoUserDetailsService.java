@@ -1,11 +1,8 @@
-package com.example.FinalTask3.config;
+package com.example.security.config;
 
-
-
-
-import com.example.FinalTask3.constants.StringConstants;
-import com.example.FinalTask3.model.UserDetails;
-import com.example.FinalTask3.repository.UserRepository;
+import com.example.security.constants.StringConstants;
+import com.example.security.model.User;
+import com.example.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,7 +16,7 @@ public class UserInfoUserDetailsService implements UserDetailsService {
 
     @Override
     public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String emailOrPhNo) throws UsernameNotFoundException {
-        UserDetails user = repository.findByEmailOrPhNo(emailOrPhNo);
+        User user = repository.findByEmailOrPhNo(emailOrPhNo);
         if (user != null) {
             return new UserDetailsInfo(user);
         } else {

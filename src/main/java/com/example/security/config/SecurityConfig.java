@@ -1,10 +1,6 @@
-package com.example.FinalTask3.config;
+package com.example.security.config;
 
-
-
-
-import com.example.FinalTask3.token.AuthenticateFilter;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.security.token.AuthenticateFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,11 +21,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 @EnableWebSecurity
 public class SecurityConfig {
-    @Autowired
-    private AuthenticateFilter authFilter;
+
+    private final AuthenticateFilter authFilter;
+
+    public SecurityConfig(AuthenticateFilter authFilter) {
+        this.authFilter = authFilter;
+    }
+
     @Bean
     public UserDetailsService userDetailsService(){
-
         return new UserInfoUserDetailsService();
     }
     @Bean
@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/Users/add","/Users/authenticate","/actuator/health").permitAll()
                 .and()
-                .authorizeHttpRequests().requestMatchers("/Contacts/**")
+                .authorizeHttpRequests().requestMatchers("/Contacts/**","/Users/all")
                 .authenticated().and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

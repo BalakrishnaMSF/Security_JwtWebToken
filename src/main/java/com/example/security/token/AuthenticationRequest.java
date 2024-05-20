@@ -1,4 +1,4 @@
-package com.example.FinalTask3.token;
+package com.example.security.token;
 
 import lombok.Data;
 
